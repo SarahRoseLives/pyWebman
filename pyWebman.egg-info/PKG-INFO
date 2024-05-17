@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: pyWebman
+Version: 0.1.0
+Summary: A package for interacting with Webman on PS3
+Home-page: https://github.com/sarahroselives/pyWebman
+Author: Sarah Rose
+Author-email: sarahroselives@protonmail.com
+Keywords: PS3 Webman package
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent

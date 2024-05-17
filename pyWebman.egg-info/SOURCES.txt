@@ -1,0 +1,8 @@
+setup.py
+pyWebman/__init__.py
+pyWebman/pyWebman.py
+pyWebman.egg-info/PKG-INFO
+pyWebman.egg-info/SOURCES.txt
+pyWebman.egg-info/dependency_links.txt
+pyWebman.egg-info/entry_points.txt
+pyWebman.egg-info/top_level.txt
