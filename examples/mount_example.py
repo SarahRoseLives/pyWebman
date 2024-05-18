@@ -1,14 +1,11 @@
-# Assuming you have a Webman instance created and stored in a variable named 'webman_instance'
-
 # Importing the Webman and Mount classes
-from webman import Webman
-from mount import Mount
+from pyWebman import WebMan
 
-# Creating a Webman instance
-webman = Webman()
+webman_instance = WebMan(ip='192.168.1.14')
+
 
 # Creating a Mount instance
-mount = Mount(webman)
+mount = webman_instance.Mount(webman_instance)
 
 # Mounting a game from a path with options
 mount.mount_path_or_iso('/dev_hdd0/game/my_game', options='auto')

@@ -1,8 +1,9 @@
-# Assume you have already created a Webman instance
-webman = Webman()
+from pyWebman import WebMan
+
+webman_instance = WebMan(ip='192.168.1.14')
 
 # Create a General instance
-general_manager = General(webman)
+general_manager = webman_instance.General(webman_instance)
 
 # Browse a full path
 general_manager.browse_path('dev_hdd0')

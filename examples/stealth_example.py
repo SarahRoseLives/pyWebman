@@ -1,3 +1,5 @@
+from pyWebman import WebMan
+
 webman_instance = WebMan(ip='192.168.1.14')
 stealth_instance = webman_instance.Stealth(webman_instance)
 

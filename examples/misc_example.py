@@ -1,4 +1,4 @@
-from pyWebman.pyWebman import WebMan
+from pyWebman import WebMan
 
 webman_instance = WebMan(ip='192.168.1.14')
 misc_instance = webman_instance.Misc(webman_instance)

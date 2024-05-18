@@ -1,8 +1,9 @@
-# Assume you have already created a Webman instance
-webman = Webman()
+from pyWebman import WebMan
+
+webman_instance = WebMan(ip='192.168.1.14')
 
 # Create a Temperature instance
-temperature_manager = Temperature(webman)
+temperature_manager = webman_instance.Temperature(webman_instance)
 
 # Example of each function:
 

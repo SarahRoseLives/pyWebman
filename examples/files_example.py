@@ -1,5 +1,4 @@
-from pyWebman.pyWebman import WebMan
-
+from pyWebman import WebMan
 
 webman_instance = WebMan(ip='192.168.1.14')
 files_instance = webman_instance.Files(webman_instance)
