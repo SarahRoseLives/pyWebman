@@ -662,7 +662,6 @@ class WebMan:
             self.webman.command(f'popup.ps3@{message}')
 
     class Gamepad:
-        # Define buttons as class attributes
         buttons = {
             'up': 'up',
             'down': 'down',
@@ -694,7 +693,6 @@ class WebMan:
         def __init__(self, webman_instance):
             self.webman = webman_instance
 
-        # Define methods to interact with the buttons
         def pad(self, buttons, delay=1):
             self.webman.command(f'pad.ps3?{buttons}', delay)
 
@@ -702,7 +700,12 @@ class WebMan:
             self.webman.command('pad.ps3?off', delay)
 
         def hold(self, buttons, delay=1):
-            self.webman.command(f'pad.ps3?hold{buttons}', delay)
+            # Split the buttons string into a list of individual button names
+            button_sequence = buttons.split(',')
+            # Iterate over each button in the sequence
+            for button in button_sequence:
+                # Send command for each button with the specified delay
+                self.webman.command(f'pad.ps3?hold={self.buttons.get(button.strip())}', delay)
 
         def release(self, delay=1):
             self.webman.command('pad.ps3?release', delay)
@@ -719,14 +722,9 @@ class WebMan:
         def combo(self, buttons, delay=1):
             self.webman.command(f'combo.ps3?{buttons}', delay)
 
-        # Instantiate the webman class with the IP address
-        # my_webman = webman(ip='192.168.1.100')
-
-        # Instantiate the Gamepad class with the webman instance
-        # gamepad_instance = webman.Gamepad(my_webman)
-
-        # Sending the triangle button
-        # gamepad_instance.pad('triangle')
+    # Example usage:
+    # gamepad_instance = Gamepad(my_webman)
+    # gamepad_instance.hold('triangle,up,up,left,left,cross,right,right,down,down,triangle', delay=2)
 
     class Togglers:
         def __init__(self, webman_instance):
