@@ -1,13 +1,15 @@
 import requests
 import time
+from bs4 import BeautifulSoup
 
 class WebMan:
     def __init__(self, ip):
         self.ip = ip
 
     def command(self, route, delay=1):
-        requests.get(f'http://{self.ip}/{route}')
+        data = requests.get(f'http://{self.ip}{route}')
         time.sleep(delay)
+        return data.text
 
     class General:
         def __init__(self, webman_instance):
@@ -90,7 +92,37 @@ class WebMan:
             self.webman = webman_instance
 
         def show_system_info(self):
-            self.webman.command('/cpursx.ps3')
+            html_content = self.webman.command('/cpursx.ps3')
+            soup = BeautifulSoup(html_content, 'html.parser')
+
+            # Extract CPU and RSX temperatures
+            temperatures = soup.find_all('a', class_='s')
+            cpu_temp, rsx_temp = "N/A", "N/A"
+            if temperatures:
+                temp_text = temperatures[0].get_text(separator="\n")
+                temp_lines = temp_text.splitlines()
+                if len(temp_lines) >= 2:
+                    cpu_temp = temp_lines[0].replace('CPU:', '').strip()
+                    rsx_temp = temp_lines[1].replace('RSX:', '').strip()
+
+            # Extract fan speed
+            fan_speed = soup.find('a', href="/cpursx.ps3?mode")
+            fan_speed_text = fan_speed.get_text().replace('FAN SPEED:', '').strip() if fan_speed else "N/A"
+
+            # Extract HDD free space
+            hdd_link = soup.find('a', string=lambda text: text and 'HDD:' in text)
+            hdd_free_space = hdd_link.get_text().replace('HDD:', '').strip() if hdd_link else "N/A"
+
+            # Extract uptime
+            uptime_section = soup.find('h1')
+            up_time = uptime_section.get_text().split('•')[
+                1].strip() if uptime_section and '•' in uptime_section.get_text() else "N/A"
+
+            print(f"CPU Temperature: {cpu_temp}")
+            print(f"RSX Temperature: {rsx_temp}")
+            print(f"Fan Speed: {fan_speed_text}")
+            print(f"HDD Free Space: {hdd_free_space}")
+            print(f"Uptime: {up_time}")
 
         def set_fan_speed(self, speed):
             self.webman.command(f'/cpursx.ps3?fan={speed}')
